@@ -1,0 +1,2 @@
+# Optional: install only if you want browser-based PDF upload.
+pypdf>=5.0,<7.0
