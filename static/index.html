@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101727">
+  <title>EvidenceDesk · Answers with receipts</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Document library">
+      <div class="brand"><div class="brand-mark" aria-hidden="true">✦</div><div><strong>EvidenceDesk</strong><span>LOCAL KNOWLEDGEBASE</span></div></div>
+      <button class="new-search" id="new-search"><span>＋</span> New search</button>
+      <div class="section-heading"><span>LIBRARY</span><span id="document-count">0 documents</span></div>
+      <div class="document-list" id="document-list"></div>
+      <label class="upload-zone" id="upload-zone">
+        <input id="file-input" type="file" accept=".md,.txt,.pdf" multiple>
+        <span class="upload-icon" aria-hidden="true">↥</span>
+        <strong>Add documents</strong>
+        <span>Drop files here, or browse</span>
+        <small>Markdown, text and PDF · max 5 MB</small>
+      </label>
+      <div class="sidebar-bottom"><span class="online-dot"></span> Local search by default</div>
+    </aside>
+
+    <main class="workspace">
+      <header class="topbar"><span class="breadcrumb">Workspace <span>›</span> Knowledge search</span><span class="mode-pill" id="mode-pill"><span class="online-dot"></span> OFFLINE · EXTRACTIVE</span></header>
+      <div class="main-content">
+        <div class="eyebrow"><span class="eyebrow-line"></span> SOURCE-GROUNDED SEARCH</div>
+        <h1>Answers with <em>receipts.</em></h1>
+        <p class="intro">Ask a question about your documents. Every result links to the exact passage it came from.</p>
+
+        <div class="mode-switch" role="group" aria-label="Answer mode">
+          <button type="button" id="extractive-mode" class="active" aria-pressed="true">⌕ &nbsp;Offline evidence</button>
+          <button type="button" id="rag-mode" aria-pressed="false" disabled title="Set OPENAI_API_KEY on the server to enable">✦ &nbsp;AI answer</button>
+        </div>
+        <p class="mode-explainer" id="mode-explainer">Local excerpts only. No document text leaves your computer.</p>
+
+        <form id="search-form" class="search-box">
+          <label for="query" class="sr-only">Ask a question</label>
+          <span class="search-spark" aria-hidden="true">✳</span>
+          <input id="query" name="query" placeholder="Ask a question about your documents…" autocomplete="off" required>
+          <button type="submit" id="search-button">Search <span aria-hidden="true">↗</span></button>
+        </form>
+        <div class="suggestions" id="suggestions">
+          <span>TRY AN EXAMPLE</span>
+          <button type="button" data-query="How do we rotate an API key?">How do we rotate an API key? <span>↗</span></button>
+          <button type="button" data-query="What is the incident escalation process?">What is the incident escalation process? <span>↗</span></button>
+          <button type="button" data-query="How often are backups restored in tests?">How often are backups restored in tests? <span>↗</span></button>
+        </div>
+
+        <section class="results" id="results" aria-live="polite">
+          <div class="empty-card"><div class="empty-icon">⌕</div><strong>Ready when you are</strong><p>Search the sample runbooks or add your own files to start exploring.</p></div>
+        </section>
+      </div>
+      <footer class="footer"><span>EvidenceDesk <span class="footer-separator">/</span> Local by default</span><span>Check the original source before acting.</span></footer>
+    </main>
+
+    <aside class="source-panel" id="source-panel" aria-label="Source document">
+      <div class="source-header"><div><span class="panel-label">SOURCE VIEW</span><h2 id="source-title">Select a citation</h2></div><button id="close-source" aria-label="Close source panel">×</button></div>
+      <div class="source-body" id="source-body"><div class="source-placeholder">Open an evidence card to inspect its full document here.</div></div>
+    </aside>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="/app.js" defer></script>
+</body>
+</html>
